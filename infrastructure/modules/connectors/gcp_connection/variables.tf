@@ -1,0 +1,1 @@
+variable "gcp_service_account" {}

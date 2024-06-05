@@ -1,0 +1,21 @@
+terraform {
+  cloud {
+    organization = "${terraform_cloud_organization}"
+
+    workspaces {
+      name = "${workspace_name}"
+    }
+  }
+
+  required_providers {
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "2.41.0"
+    }
+  }
+}
+
+provider "azuread" {
+  client_id = ${azuread_client_id_var_name}
+  tenant_id = ${azuread_tenant_id_var_name}
+}
