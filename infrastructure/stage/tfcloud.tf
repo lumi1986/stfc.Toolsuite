@@ -1,6 +1,6 @@
 locals {
   workspaces = flatten([
-    for microservice_key, microservice in war.microservices : [
+    for microservice_key, microservice in var.microservices : [
       for environment_key, environment in var.environments : {
         microservice_key = microservice_key
         environment_key  = environment_key
