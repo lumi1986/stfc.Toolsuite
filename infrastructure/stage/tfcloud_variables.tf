@@ -4,3 +4,5 @@ variable "subscription_id" {}
 variable "tenant_id" {}
 variable "resource_location" {}
 variable "terraform_cloud_api_token" {}
+variable "terraform_cloud_org" {}
+variable "terraform_cloud_proj_id" {}
