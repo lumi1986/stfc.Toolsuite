@@ -8,6 +8,10 @@ terraform {
       source  = "hashicorp/tfe"
       version = "0.55.0"
     }
+    github = {
+      source  = "integrations/github"
+      version = "~> 6.0"
+    }
   }
 }
 
@@ -24,4 +28,8 @@ provider "azurerm" {
 
 provider "tfe" {
   token = var.terraform_cloud_api_token
+}
+
+provider "github" {
+  token = var.github_api_token
 }
