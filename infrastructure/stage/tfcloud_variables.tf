@@ -6,4 +6,5 @@ variable "resource_location" {}
 variable "terraform_cloud_api_token" {}
 variable "terraform_cloud_org" {}
 variable "terraform_cloud_proj_id" {}
+variable "terraform_cloud_github_app_id" {}
 variable "github_api_token" {}
