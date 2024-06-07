@@ -13,7 +13,7 @@ environments = {
 
 microservices = {
   "mitigation_calculator" = {
-    name          = "MitigationCalulator"
+    name          = "MitigationCalculator"
     friendly_name = "Microservice Mitigation Calculator"
     description   = "Backend microservice able to calculate mitigation values"
   }
