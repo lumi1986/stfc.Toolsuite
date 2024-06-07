@@ -1,5 +1,5 @@
 resource "github_repository" "microservices" {
   for_each = var.microservices
-  name        = "stfc.${each.value.Name}"
+  name        = "stfc.${each.value.name}"
   visibility = "public"
 }
