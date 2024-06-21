@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "3.104.2"
     }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "2.52.0"
+    }
     tfe = {
       source  = "hashicorp/tfe"
       version = "0.55.0"
@@ -12,6 +16,7 @@ terraform {
       source  = "integrations/github"
       version = "~> 6.0"
     }
+
   }
 }
 
@@ -24,6 +29,12 @@ provider "azurerm" {
   client_id       = var.client_id
   client_secret   = var.client_secret
   tenant_id       = var.tenant_id
+}
+
+provider "azuread" {
+  client_id     = var.client_id
+  client_secret = var.client_secret
+  tenant_id     = var.tenant_id
 }
 
 provider "tfe" {
