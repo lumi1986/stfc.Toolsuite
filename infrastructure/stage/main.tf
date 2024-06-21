@@ -26,3 +26,21 @@ resource "azurerm_container_app_environment" "this" {
   location            = azurerm_resource_group.stfc_toolsuite.location
   resource_group_name = azurerm_resource_group.stfc_toolsuite.name
 }
+
+data "azurerm_subscription" "this" {
+}
+
+
+resource "azuread_application" "managed_terraform_agent" {
+  display_name = "Test"
+}
+
+resource "azuread_service_principal" "sp" {
+  client_id = azuread_application.managed_terraform_agent.client_id
+}
+
+resource "azurerm_role_assignment" "read_access_exauto" {
+  scope                = "/subscriptions/${data.azurerm_subscription.this.subscription_id}"
+  role_definition_name = "Contributor"
+  principal_id         = azuread_service_principal.sp.object_id
+}
