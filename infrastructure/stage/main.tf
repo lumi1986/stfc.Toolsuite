@@ -30,12 +30,12 @@ resource "azurerm_container_app_environment" "this" {
 data "azurerm_subscription" "this" {
 }
 
-
-resource "azuread_application" "managed_terraform_agent" {
-  display_name = "Test"
+resource "azuread_application" "terraform_cloud_workspace_agent" {
+  for_each     = local.workspaces
+  display_name = "TerraformCloud_${each.value.microservice_name}_${each.value.environment_name}"
 }
 
-resource "azuread_service_principal" "sp" {
+/*resource "azuread_service_principal" "sp" {
   client_id = azuread_application.managed_terraform_agent.client_id
 }
 
@@ -43,4 +43,4 @@ resource "azurerm_role_assignment" "read_access_exauto" {
   scope                = "/subscriptions/${data.azurerm_subscription.this.subscription_id}"
   role_definition_name = "Contributor"
   principal_id         = azuread_service_principal.sp.object_id
-}
+}*/
