@@ -35,6 +35,11 @@ resource "azuread_application" "terraform_cloud_workspace_agent" {
   display_name = "TerraformCloud_${each.value.microservice_name}_${each.value.environment_name}"
 }
 
+resource "azuread_application_password" "terraform_cloud_workspace_agent_password" {
+  for_each       = local.workspaces
+  application_id = azuread_application.terraform_cloud_workspace_agent[each.key].application_id
+}
+
 resource "azuread_service_principal" "terraform_cloud_workspace_agent_sp" {
   for_each  = local.workspaces
   client_id = azuread_application.terraform_cloud_workspace_agent[each.key].client_id
