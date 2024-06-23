@@ -35,12 +35,14 @@ resource "azuread_application" "terraform_cloud_workspace_agent" {
   display_name = "TerraformCloud_${each.value.microservice_name}_${each.value.environment_name}"
 }
 
-/*resource "azuread_service_principal" "sp" {
-  client_id = azuread_application.managed_terraform_agent.client_id
+resource "azuread_service_principal" "terraform_cloud_workspace_agent_sp" {
+  for_each  = local.workspaces
+  client_id = azuread_application.terraform_cloud_workspace_agent[each.key].client_id
 }
 
-resource "azurerm_role_assignment" "read_access_exauto" {
+resource "azurerm_role_assignment" "contributor_terraform_cloud_workspace_agent_sp" {
+  for_each             = local.workspaces
   scope                = "/subscriptions/${data.azurerm_subscription.this.subscription_id}"
   role_definition_name = "Contributor"
-  principal_id         = azuread_service_principal.sp.object_id
-}*/
+  principal_id         = azuread_service_principal.terraform_cloud_workspace_agent_sp[each.key].object_id
+}
