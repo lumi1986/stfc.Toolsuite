@@ -9,7 +9,7 @@ locals {
           microservice_friendly_name = microservice.friendly_name
           environment_name           = environment.name
           environment_friendly_name  = environment.friendly_name
-          environment_is_virtual     = environment.is_virtual
+          environment_is_virtual     = environment.virtual
         }
       ]
     ])
