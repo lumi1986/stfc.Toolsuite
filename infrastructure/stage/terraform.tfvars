@@ -3,6 +3,7 @@ environments = {
     name          = "LocalDebug"
     friendly_name = "Local Debug Environment"
     description   = "Environment for local develeopment and debugging. Mostly the machine of a developer itself"
+    is_virtual    = "true"
   }
   dev = {
     name          = "Dev"
