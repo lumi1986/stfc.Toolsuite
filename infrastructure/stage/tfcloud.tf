@@ -54,7 +54,7 @@ resource "tfe_variable" "tenant_id" {
 
 resource "tfe_variable" "container_app_environment_id" {
   for_each     = local.workspaces
-  key          = "tenant_id"
+  key          = "container_app_environment_id"
   value        = azurerm_container_app_environment.this.id
   category     = "terraform"
   workspace_id = tfe_workspace.microservice[each.key].id
