@@ -12,5 +12,6 @@ variable "environments" {
     name          = string
     friendly_name = string
     description   = string
+    virtual       = optional(bool, false)
   }))
 }

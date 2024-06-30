@@ -52,26 +52,6 @@ resource "tfe_variable" "tenant_id" {
   sensitive    = false
 }
 
-resource "tfe_variable" "tenant_id" {
-  for_each     = local.workspaces
-  key          = "tenant_id"
-  value        = var.tenant_id
-  category     = "terraform"
-  workspace_id = tfe_workspace.microservice[each.key].id
-  description  = "ID of azure tenant ressources in this project are placed inside"
-  sensitive    = false
-}
-
-resource "tfe_variable" "tenant_id" {
-  for_each     = local.workspaces
-  key          = "tenant_id"
-  value        = var.tenant_id
-  category     = "terraform"
-  workspace_id = tfe_workspace.microservice[each.key].id
-  description  = "ID of azure tenant ressources in this project are placed inside"
-  sensitive    = false
-}
-
 resource "tfe_variable" "container_app_environment_id" {
   for_each     = local.workspaces
   key          = "tenant_id"
@@ -86,6 +66,16 @@ resource "tfe_variable" "resource_group_id" {
   for_each     = local.workspaces
   key          = "resource_group_id"
   value        = azurerm_resource_group.stfc_toolsuite.id
+  category     = "terraform"
+  workspace_id = tfe_workspace.microservice[each.key].id
+  description  = "ID of default azure ressource group"
+  sensitive    = false
+}
+
+resource "tfe_variable" "is_vritual" {
+  for_each     = local.workspaces
+  key          = "is_vritual"
+  value        = each.value.environment_is_virtual
   category     = "terraform"
   workspace_id = tfe_workspace.microservice[each.key].id
   description  = "ID of default azure ressource group"
