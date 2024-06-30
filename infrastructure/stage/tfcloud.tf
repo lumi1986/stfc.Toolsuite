@@ -72,12 +72,32 @@ resource "tfe_variable" "resource_group_id" {
   sensitive    = false
 }
 
+resource "tfe_variable" "resource_group_name" {
+  for_each     = local.workspaces
+  key          = "resource_group_name"
+  value        = azurerm_resource_group.stfc_toolsuite.name
+  category     = "terraform"
+  workspace_id = tfe_workspace.microservice[each.key].id
+  description  = "Name of default azure ressource group"
+  sensitive    = false
+}
+
+resource "tfe_variable" "environment_short_name" {
+  for_each     = local.workspaces
+  key          = "environment_short_name"
+  value        = each.value.environment_key
+  category     = "terraform"
+  workspace_id = tfe_workspace.microservice[each.key].id
+  description  = "Short name of environment"
+  sensitive    = false
+}
+
 resource "tfe_variable" "is_vritual" {
   for_each     = local.workspaces
   key          = "is_vritual"
   value        = each.value.environment_is_virtual
   category     = "terraform"
   workspace_id = tfe_workspace.microservice[each.key].id
-  description  = "ID of default azure ressource group"
+  description  = "Marks environment as virtual"
   sensitive    = false
 }
